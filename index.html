@@ -34,18 +34,7 @@
           ], 
           tooltip: { 
             shared: true 
-          },
-          series: [{
-            name: 'Bids',
-            type: 'line',
-            yAxis: 0,
-            data: [1,2,3],
-          }, {
-            name: 'Wins',
-            type: 'line',
-            yAxis: 1,
-            data: [4,5,6],
-          }]
+          }
         };
         
         var dateSelect  = $('#dateSelect').MPDatepicker();
@@ -71,19 +60,22 @@
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
             console.log(data);
-            series[0]['data'].push(1,2,3);
+            promiselist.push(data['Male']);
           });
           
           var eventName = "Item Won";
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
-            console.log(data);
-            series[1]['data'].push(5,6,7);
+            console.log(data['Male']);
+            promiselist.push(data);
           });
           
-          console.log(series);
+          Promise.all(promises).then(function(promiseArray){
+            for(i=0; i<promiseArray.length; i++) {
+              eventGraph.MPChart('addSeries', promiseArray[i]);
+            }
+          });
           
-          eventGraph= $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
         };
         
         dateSelect.on('change', runQuery);
