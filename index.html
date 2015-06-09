@@ -68,7 +68,7 @@
             promiselist.push(data['Male']);
           });
           
-          Promise.all(promises).then(function(promiseArray){
+          Promise.all(promiselist).then(function(promiseArray){
             for(i=0; i<promiseArray.length; i++) {
               eventGraph.MPChart('addSeries', promiseArray[i]);
             }
