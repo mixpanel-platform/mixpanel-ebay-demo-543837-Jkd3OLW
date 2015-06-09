@@ -20,7 +20,7 @@
           yAxis: [
             { // Primary yAxis 
               title: { 
-                text: 'Unique Users' 
+                text: 'Bids' 
               }, 
               min: 0 
             }, 
@@ -45,20 +45,27 @@
               propName  = "Gender",
               dateRange = dateSelect.MPDatepicker('value');
           
-          var series = [];
+          var series = [{
+            name: 'Bids',
+            yAxis: 0,
+            data: [],
+          }, {
+            name: 'Wins',
+            yAxis: 1,
+            data: [],
+          }];
               
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
             console.log(data);
-            series.push(data);
+            series[0]['data'].push(data);
           });
           
           var eventName = "Item Won";
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
             console.log(data);
-            data['yAxis'] = 1;
-            series.push(data);
+            series[1]['data'].push(data);
           });
           
           eventGraph.MPChart('addSeries', series);
