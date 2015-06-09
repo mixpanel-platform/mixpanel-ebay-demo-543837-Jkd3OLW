@@ -57,7 +57,11 @@
                 if(j==0) {  axiskeys.push(keys[j]); }
                 console.log(keys[j]);
                 console.log(promiseArray[i].values()['Male'][keys[j]]);
-                tempdata[j].push(promiseArray[i].values()['Male'][keys[j]]);
+                if(promiseArray[i].values()['Male'][keys[j]] !== undefined){
+                  tempdata[j].push(promiseArray[i].values()['Male'][keys[j]]);
+                } else {
+                  tempdata[j].push(0);
+                }
               }
             }
             
