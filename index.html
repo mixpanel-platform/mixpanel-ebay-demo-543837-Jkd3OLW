@@ -58,14 +58,14 @@
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
             console.log(data);
-            series[0]['data'].push(data);
+            series[0]['data'].push(1,2,3);
           });
           
           var eventName = "Item Won";
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
             console.log(data);
-            series[1]['data'].push(data);
+            series[1]['data'].push(5,6,7);
           });
           
           console.log(series);
