@@ -60,10 +60,7 @@
                 zoomType: 'xy'
               },
               title: {
-                text: 'Average Monthly Temperature and Rainfall in Tokyo'
-              },
-              subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: 'Bids vs. Wins'
               },
               xAxis: [
                 {
@@ -79,7 +76,7 @@
                 }, 
               { // Secondary yAxis 
                   title: { 
-                    text: 'Ratio' 
+                    text: 'Wins' 
                   }, 
                   opposite: true, 
                   min:0 
@@ -92,11 +89,11 @@
                 {
                   name: 'Bids',
                   type: 'line',
-                  yAxis: 1,
                   data: tempdata[0]
                 }, {
                   name: 'Wins',
                   type: 'line',
+                  yAxis: 1,
                   data: tempdata[1],
                 }
               ]
