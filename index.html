@@ -49,6 +49,8 @@
               console.log(promiseArray[i].values()['Male']);
               var tempdata = [];
               var axiskeys = [];
+              tempdata[0] = [];
+              tempdata[1] = [];
               var keys = Object.keys(promiseArray[i].values()['Male']);
               for(j=0; j<keys.length; j++) {
                 if(j==0) {  axiskeys.push(keys[j]); }
