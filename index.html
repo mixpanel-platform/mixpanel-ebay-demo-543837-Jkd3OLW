@@ -34,7 +34,16 @@
           ], 
           tooltip: { 
             shared: true 
-          }
+          },
+          series: [{
+            name: 'Bids',
+            yAxis: 0,
+            data: [1,2,3],
+          }, {
+            name: 'Wins',
+            yAxis: 1,
+            data: [4,5,6],
+          }]
         };
         
         var dateSelect  = $('#dateSelect').MPDatepicker();
@@ -54,6 +63,8 @@
             yAxis: 1,
             data: [],
           }];
+          
+          var promiselist = []
               
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
