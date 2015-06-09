@@ -55,7 +55,7 @@
             console.log(tempdata);
             console.log(axiskeys);
             
-            var dualAxis = {
+            $('#graph').highcharts({
               chart: {
                 zoomType: 'xy'
               },
@@ -100,13 +100,7 @@
                   data: tempdata[1],
                 }
               ]
-            };
-            
-            console.log(dualAxis);
-            
-            //var eventGraph = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
-            
-            $('#graph').highcharts({ dualAxis });
+            });
           });
           
         };
