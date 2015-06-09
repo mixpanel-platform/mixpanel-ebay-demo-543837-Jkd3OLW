@@ -7,9 +7,6 @@
   </head>
   <body class="mixpanel-platform-body">
     <div class="mixpanel-platform-section">
-      <div id="eventSelect" style="float: left;"></div>
-      <div id="by" class="mixpanel-platform-label" style="margin-left: 10px; display: none;">by</div>
-      <div id="propSelect" style="float: left;"></div>
       <div id="dateSelect" style="float: right;"></div>
       <div style="clear: both;"></div>
       <div id="graphSelect" style="float: right;"></div>
@@ -18,37 +15,46 @@
     <div id="table"></div>
     <script>
       MP.api.ready(function() {
-        var eventSelect = $('#eventSelect').MPEventSelect();
-        var propSelect  = $('#propSelect').MPPropertySelect();
-        var dateSelect  = $('#dateSelect').MPDatepicker();
-        var eventGraph  = $('#graph').MPChart({chartType: 'line'});
-        var eventTable  = $('#table').MPTable({
-          showPercentages: true,
-          firstColHeader: 'Event'
-        });
-        var runQuery = function() {
-          var eventName = eventSelect.MPEventSelect('value'),
-              propName  = propSelect.MPPropertySelect('value'),
-              dateRange = dateSelect.MPDatepicker('value');
-          if (eventName && propName) {
-            MP.api.segment(eventName, propName, dateRange).done(function(results) {
-              data = results.values();
-              console.log(data);
-              eventGraph.MPChart('setData', data);
-              eventTable.MPTable('setData', data);
-            });
+        
+        var dualAxis = { 
+          yAxis: [
+            { // Primary yAxis 
+              title: { 
+                text: 'Unique Users' 
+              }, 
+              min: 0 
+            }, 
+          { // Secondary yAxis 
+              title: { 
+                text: 'Ratio' 
+              }, 
+              opposite: true, 
+              min:0 
+            }
+          ], 
+          tooltip: { 
+            shared: true 
           }
         };
         
-        eventSelect.on('change', function(e, eventName) {
-          propSelect.MPPropertySelect('setEvent', eventName);
-          $("#by").show();
-          runQuery();
-        });
-        
-        propSelect.on('change', runQuery);
+        var dateSelect  = $('#dateSelect').MPDatepicker();
+        var eventGraph  = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
+
+        var runQuery = function() {
+          var eventName = "Bid Placed",
+              propName  = "Gender",
+              dateRange = dateSelect.MPDatepicker('value');
+              
+          MP.api.segment(eventName, propName, dateRange).done(function(results) {
+            data = results.values();
+            console.log(data);
+            eventGraph.MPChart('addSeries', data);
+          });
+        };
         
         dateSelect.on('change', runQuery);
+        
+        runQuery();
         
       });
     </script>
