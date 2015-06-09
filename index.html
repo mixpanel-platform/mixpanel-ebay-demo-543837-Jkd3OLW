@@ -69,7 +69,7 @@
           Promise.all(promiselist).then(function(promiseArray){
             for(i=0; i<promiseArray.length; i++) {
               console.log(promiseArray[i].values()['Male']);
-              //eventGraph.MPChart('addSeries', promiseArray[i]);
+              eventGraph.MPChart('addSeries', promiseArray[i].values()['Male']);
             }
           });
           
