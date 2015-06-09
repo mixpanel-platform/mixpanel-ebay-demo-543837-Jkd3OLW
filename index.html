@@ -55,6 +55,7 @@
               console.log(keys);
               for(j=0; j<keys.length; j++) {
                 if(j==0) {  axiskeys.push(keys[j]); }
+                console.log(keys[j]);
                 console.log(promiseArray[i].values()['Male'][keys[j]]);
                 tempdata[j].push(promiseArray[i].values()['Male'][keys[j]]);
               }
