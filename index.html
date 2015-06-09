@@ -48,7 +48,7 @@
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
             console.log(data);
-            eventGraph.MPChart('addSeries', data);
+            eventGraph.MPChart('setData', data);
           });
           
           var eventName = "Item Won";
