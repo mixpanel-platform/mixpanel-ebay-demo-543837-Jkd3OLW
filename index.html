@@ -57,20 +57,19 @@
           
           var promiselist = []
               
-          MP.api.segment(eventName, propName, dateRange).done(function(results) {
-            data = results.values();
-            promiselist.push(data['Male']);
-          });
+          promiselist.push(MP.api.segment(eventName, propName, dateRange).done(function(results) {
+            return results.values();
+          }));
           
           var eventName = "Item Won";
-          MP.api.segment(eventName, propName, dateRange).done(function(results) {
-            data = results.values();
-            promiselist.push(data['Male']);
-          });
+          promiselist.push(MP.api.segment(eventName, propName, dateRange).done(function(results) {
+            return results.values();
+          }));
           
           Promise.all(promiselist).then(function(promiseArray){
             for(i=0; i<promiseArray.length; i++) {
-              eventGraph.MPChart('addSeries', promiseArray[i]);
+              console.log(promiseArray[i]);
+              //eventGraph.MPChart('addSeries', promiseArray[i]);
             }
           });
           
@@ -78,7 +77,7 @@
         
         dateSelect.on('change', runQuery);
         
-        //runQuery();
+        runQuery();
         
       });
     </script>
