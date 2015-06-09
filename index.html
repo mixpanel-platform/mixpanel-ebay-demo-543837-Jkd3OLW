@@ -45,12 +45,12 @@
           }));
           
           Promise.all(promiselist).then(function(promiseArray){
+            var tempdata = {};
+            var axiskeys = [];
+            tempdata[0] = [];
+            tempdata[1] = [];
             for(i=0; i<promiseArray.length; i++) {
               console.log(promiseArray[i].values()['Male']);
-              var tempdata = {};
-              var axiskeys = [];
-              tempdata[0] = [];
-              tempdata[1] = [];
               var keys = Object.keys(promiseArray[i].values()['Male']);
               var thisdata = promiseArray[i].values()['Male'];
               console.log(thisdata);
