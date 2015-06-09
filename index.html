@@ -59,15 +59,13 @@
               
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
-            console.log(data);
             promiselist.push(data['Male']);
           });
           
           var eventName = "Item Won";
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
-            console.log(data['Male']);
-            promiselist.push(data);
+            promiselist.push(data['Male']);
           });
           
           Promise.all(promises).then(function(promiseArray){
