@@ -56,13 +56,12 @@
               console.log(thisdata);
               for(j=0; j<keys.length; j++) {
                 if(i==0) {  axiskeys.push(keys[j]); }
-                try {
-                  tempdata[i].push(thisdata[keys[j]]);
-                } catch(err) {
-                  console.log(keys[j]);
-                }
+                tempdata[i].push(thisdata[keys[j]]);
               }
             }
+            
+            console.log(tempdata);
+            console.log(axiskeys);
             
             var dualAxis = {
               xAxis: [
@@ -102,7 +101,7 @@
               ]
             };
             
-            var eventGraph  = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
+            var eventGraph = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
           });
           
         };
