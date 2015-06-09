@@ -44,11 +44,13 @@
           var eventName = "Bid Placed",
               propName  = "Gender",
               dateRange = dateSelect.MPDatepicker('value');
+          
+          var series = [];
               
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
             console.log(data);
-            eventGraph.MPChart('setData', data);
+            series.push(data);
           });
           
           var eventName = "Item Won";
@@ -56,8 +58,10 @@
             data = results.values();
             console.log(data);
             data['yAxis'] = 1;
-            eventGraph.MPChart('addSeries', data);
+            series.push(data);
           });
+          
+          eventGraph.MPChart('addSeries', series);
         };
         
         dateSelect.on('change', runQuery);
