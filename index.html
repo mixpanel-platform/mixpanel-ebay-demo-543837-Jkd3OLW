@@ -23,17 +23,7 @@
               propName  = "Gender",
               dateRange = dateSelect.MPDatepicker('value');
           
-          var series = [{
-            name: 'Bids',
-            yAxis: 0,
-            data: [],
-          }, {
-            name: 'Wins',
-            yAxis: 1,
-            data: [],
-          }];
-          
-          var promiselist = []
+          var promiselist = [];
               
           promiselist.push(MP.api.segment(eventName, propName, dateRange).done(function(results) {
             return results.values();
@@ -103,7 +93,9 @@
             
             console.log(dualAxis);
             
-            var eventGraph = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
+            //var eventGraph = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
+            
+            $('#graph').highcharts({ dualAxis });
           });
           
         };
