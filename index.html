@@ -55,6 +55,7 @@
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             data = results.values();
             console.log(data);
+            data['yAxis'] = 1;
             eventGraph.MPChart('addSeries', data);
           });
         };
