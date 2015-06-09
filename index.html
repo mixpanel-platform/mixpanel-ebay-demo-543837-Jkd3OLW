@@ -83,7 +83,7 @@
           
           console.log(series);
           
-          eventGraph.MPChart('addSeries', series);
+          eventGraph= $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
         };
         
         dateSelect.on('change', runQuery);
