@@ -50,7 +50,7 @@
               var tempdata = [];
               var axiskeys = [];
               var keys = Object.keys(promiseArray[i].values()['Male']);
-              for(j=0, j<keys.length; j++) {
+              for(j=0; j<keys.length; j++) {
                 if(j==0) {  axiskeys.push(keys[j]); }
                 tempdata[j].push(promiseArray[i].values()['Male'][keys[i]]);
               }
