@@ -56,47 +56,47 @@
               }
             }
             
+            var dualAxis = {
+              xAxis: [
+                {
+                  categories: axiskeys
+                }
+              ]
+              yAxis: [
+                { // Primary yAxis 
+                  title: { 
+                    text: 'Bids' 
+                  }, 
+                  min: 0 
+                }, 
+              { // Secondary yAxis 
+                  title: { 
+                    text: 'Ratio' 
+                  }, 
+                  opposite: true, 
+                  min:0 
+                }
+              ], 
+              tooltip: { 
+                shared: true 
+              },
+              series: [
+                {
+                  name: 'Bids',
+                  type: 'line',
+                  yAxis: 0,
+                  data: tempdata[0]
+                }, {
+                  name: 'Wins',
+                  type: 'line',
+                  data: tempdata[1],
+                }
+              ]
+            };
             
+            var eventGraph  = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
           });
-          var dualAxis = {
-            xAxis: [
-              {
-                categories: axiskeys
-              }
-            ]
-            yAxis: [
-              { // Primary yAxis 
-                title: { 
-                  text: 'Bids' 
-                }, 
-                min: 0 
-              }, 
-            { // Secondary yAxis 
-                title: { 
-                  text: 'Ratio' 
-                }, 
-                opposite: true, 
-                min:0 
-              }
-            ], 
-            tooltip: { 
-              shared: true 
-            },
-            series: [
-              {
-                name: 'Bids',
-                type: 'line',
-                yAxis: 0,
-                data: tempdata[0]
-              }, {
-                name: 'Wins',
-                type: 'line',
-                data: tempdata[1],
-              }
-            ]
-          };
           
-          var eventGraph  = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
         };
         
         dateSelect.on('change', runQuery);
