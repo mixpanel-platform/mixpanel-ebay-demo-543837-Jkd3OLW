@@ -16,29 +16,7 @@
     <script>
       MP.api.ready(function() {
         
-        var dualAxis = { 
-          yAxis: [
-            { // Primary yAxis 
-              title: { 
-                text: 'Bids' 
-              }, 
-              min: 0 
-            }, 
-          { // Secondary yAxis 
-              title: { 
-                text: 'Ratio' 
-              }, 
-              opposite: true, 
-              min:0 
-            }
-          ], 
-          tooltip: { 
-            shared: true 
-          }
-        };
-        
         var dateSelect  = $('#dateSelect').MPDatepicker();
-        var eventGraph  = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
 
         var runQuery = function() {
           var eventName = "Bid Placed",
@@ -69,10 +47,56 @@
           Promise.all(promiselist).then(function(promiseArray){
             for(i=0; i<promiseArray.length; i++) {
               console.log(promiseArray[i].values()['Male']);
-              eventGraph.MPChart('addSeries', promiseArray[i].values());
+              var tempdata = [];
+              var axiskeys = [];
+              var keys = Object.keys(promiseArray[i].values()['Male']);
+              for(j=0, j<keys.length; j++) {
+                if(j==0) {  axiskeys.push(keys[j]); }
+                tempdata[j].push(promiseArray[i].values()['Male'][keys[i]]);
+              }
             }
+            
+            
           });
+          var dualAxis = {
+            xAxis: [
+              {
+                categories: axiskeys
+              }
+            ]
+            yAxis: [
+              { // Primary yAxis 
+                title: { 
+                  text: 'Bids' 
+                }, 
+                min: 0 
+              }, 
+            { // Secondary yAxis 
+                title: { 
+                  text: 'Ratio' 
+                }, 
+                opposite: true, 
+                min:0 
+              }
+            ], 
+            tooltip: { 
+              shared: true 
+            },
+            series: [
+              {
+                name: 'Bids',
+                type: 'line',
+                yAxis: 0,
+                data: tempdata[0]
+              }, {
+                name: 'Wins',
+                type: 'line',
+                data: tempdata[1],
+              }
+            ]
+          };
           
+          var eventGraph  = $('#graph').MPChart({chartType: 'line', highchartsOptions: dualAxis});
         };
         
         dateSelect.on('change', runQuery);
